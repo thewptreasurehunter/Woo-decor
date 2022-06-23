@@ -24,7 +24,7 @@ function wttwoodecor_settings_init() {
     // Register a new setting for "woodecor" page.
     register_setting( 'woodecor', 'woodecor_options1' );
     register_setting( 'woodecor', 'woodecor_options2' );
-    
+    register_setting( 'woodecor', 'woodecor_options3' );
  
     // Register a new section in the "woodecor" page.
     add_settings_section(
@@ -41,10 +41,16 @@ function wttwoodecor_settings_init() {
         'woodecor_field_cart_cb',
         'woodecor',
         'woodecor_section_developers');
-        add_settings_field(
-        'woodecor_field_readmore', 
-            __( 'Out of Stock Button Text', 'woodecor' ),
+
+        add_settings_field('woodecor_field_readmore', __( 'Out of Stock Button Text', 'woodecor' ),
+
         'woodecor_field_readmore_cb',
+        'woodecor',
+        'woodecor_section_developers');
+
+        add_settings_field('woodecor_sticky_cart', __( 'Sticky Cart enable', 'woodecor' ),
+            
+        'woodecor_sticky_cart_cb',
         'woodecor',
         'woodecor_section_developers');
 
@@ -94,13 +100,15 @@ function woodecor_field_cart_cb( $args ) {
     $options = get_option( 'woodecor_options1' );
     ?>
    
-  
+      <span class="toltip-section">
+        
+          <span class="tooltiptext">Set Add to cart Button Text</span>
+       
+    </span>
     <input id='woodecor_field_cart' placeholder="Add To Cart" name='woodecor_options1' type='text' value="<?php echo esc_html($options);?>" />
     <p class="description">
-         <div class="tooltip"><?php esc_html_e( 'here set your text.', 'woodecor' ); ?>
-          <span class="tooltiptext">Set Add to cart Button Text</span>
-        </div>
-        
+       
+        <?php esc_html_e( 'here set your text.', 'woodecor' ); ?>
     </p>
   
     <?php
@@ -109,14 +117,16 @@ function woodecor_field_readmore_cb( $args ) {
     // Get the value of the setting we've registered with register_setting()
     $options = get_option( 'woodecor_options2' );
     ?>
-   
+    <span class="toltip-section">
+        
+          <span class="tooltiptext">Set Out of Stock Button Text</span>
+       
+    </span>
   
     <input id='woodecor_field_readmore' placeholder="Read More" name='woodecor_options2' type='text' value="<?php echo esc_html($options);?>" />
     <p class="description">
-         <div class="tooltip"><?php esc_html_e( 'here set your text.', 'woodecor' ); ?>
-          <span class="tooltiptext">Set Out of Stock Button Text</span>
-        </div>
-        
+         
+        <?php esc_html_e( 'here set your text.', 'woodecor' ); ?>
     </p>
    
 
@@ -125,6 +135,38 @@ function woodecor_field_readmore_cb( $args ) {
     <?php
 }
  
+ function woodecor_sticky_cart_cb( $args ) {
+    // Get the value of the setting we've registered with register_setting()
+    $options = get_option( 'woodecor_options3' );
+    // Get the value of this option.
+$checked = $options;
+ 
+// The value to compare with (the value of the checkbox below).
+$current = 1; 
+ 
+// True by default, just here to make things clear.
+$echo = true;
+ 
+?>
+
+    <span class="toltip-section">
+        
+          <span class="tooltiptext">Check this to enable sticky</span>
+       
+    </span>
+  
+
+    <input type="checkbox" id="woodecor_sticky_cart" name="woodecor_options3" value="1" <?php checked( $checked, $current, $echo ); ?>/>
+    <p class="description">
+         
+        <?php esc_html_e( 'Check this to enable.', 'woodecor' ); ?>
+    </p>
+   
+
+         
+  
+    <?php
+}
 /**
  * Add the top level menu page.
  */

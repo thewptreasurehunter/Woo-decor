@@ -37,8 +37,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
         }
 //stickyt
+$stky=get_option( 'woodecor_options3' );
+        if(!empty($stky)){
 
-add_filter('woocommerce_after_single_product','my_func');
+            add_filter('woocommerce_after_single_product','my_func');
 function my_func(){
         global $woocommerce;
         global $post;
@@ -54,7 +56,7 @@ function my_func(){
             <!-- Main Container of stick bar -->
                 <div class="woodecor-sticky-cart">
                     <?php echo $product_details->get_name(); ?>
-                                                    <div class="mg-wsac-col mg-wsac-container mg-wsac-center center-blck padding">
+                                                    <div class="mg-woodecor-col mg-woodecor-container mg-woodecor-center center-blck padding">
                                 <?php $currency_symb = get_woocommerce_currency_symbol(get_woocommerce_currency()) //get currency then convert to symbol ; ?>
                                 <?php if( !empty($product_details->get_sale_price())) : // check for sale price ?>
                                 <strike class="stky-strike">
@@ -64,20 +66,20 @@ function my_func(){
 
                                 </strike>
                                 &nbsp;
-                                <span class="mg-wsac-badge">
+                                <span class="mg-woodecor-badge">
                                     <?php echo $currency_symb.number_format($product_details->get_sale_price(),2)?>
 
                                 </span>
                                 <?php else: ?>
-                                <span class="mg-wsac-badge">
+                                <span class="mg-woodecor-badge">
                                     <?php echo $currency_symb.number_format($product_details->get_regular_price(),2); ?>
                                 </span>     
                                 <?php endif ; ?>
                             </div>
                                                     <!-- Fourth section or add to cart section  -->
-                        <div class="col-width mg-wsac-container mg-wsac-center padding"  >
-                            <div class="mg-wsac-row  height" >
-                                <div class="mg-wsac-col mg-wsac-container mg-wsac-center center-blck stky-cart-section">
+                        <div class="col-width mg-woodecor-container mg-woodecor-center padding"  >
+                            <div class="mg-woodecor-row  height" >
+                                <div class="mg-woodecor-col mg-woodecor-container mg-woodecor-center center-blck stky-cart-section">
                                     <?php if( $product_details->is_in_stock() ) : 
                                         $shop_page_url = get_site_url();
                                     $_product = wc_get_product( $post->ID );
@@ -89,14 +91,14 @@ function my_func(){
                                     <a href="<?php echo $shop_page_url; ?>/shop/?add-to-cart=<?php echo $post->ID?>" class="woodecor-button <?php echo $product_class; ?>  cart-text">
 
                                     <?php if( $product_class == 'variable-product' ) : ?>
-                                        <?php echo _e('add to cart' , 'wsac'); ?></a>
+                                        <?php echo _e('add to cart' , 'woodecor'); ?></a>
                                     <?php else : ?>
-                                        <?php echo _e('add cart' , 'wsac'); ?></a>
+                                        <?php echo _e('add to cart' , 'woodecor'); ?></a>
                                     <?php endif; ?>
         
                                       <?php else : ?>
-                                      <p class="mg-wsac-out-of-stock ">
-                                        <?php echo _e('Out Of Stock' , 'wsac' ) ; ?>
+                                      <p class="mg-woodecor-out-of-stock ">
+                                        <?php echo _e('Out Of Stock' , 'woodecor' ) ; ?>
                                       </p>
                                     <?php endif ; ?>
                                 </div>
@@ -113,6 +115,10 @@ function my_func(){
  
             
         }
+
+        }
+
+
     
 
 

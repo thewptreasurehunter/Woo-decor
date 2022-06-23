@@ -3,7 +3,7 @@
    left: 0;
    bottom: 0;
    width: 100%;
-   background-color: green;
+   background-color: #c5c5c5;
    color: black;
    text-align: center;
    z-index: 999999;
@@ -13,7 +13,8 @@
   padding-top: 30px;
 }
 a.woodecor-button {
-    background: #ddd;
+    background: #343030;
+    color: #ddd !important;
     padding: 14px;
     border-radius: 3px;
 }
